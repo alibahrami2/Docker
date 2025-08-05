@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  gitlab:
+    image: docker.arvancloud.ir/gitlab/gitlab-ce:latest
+    container_name: gitlab
+    restart: always
+    hostname: 'gitlab.ubuntu2.com'  
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://gitlab.ubuntu2.com'
+    ports:
+      - "80:80"     
+      - "2222:22"     
+    volumes:
+      - ./config:/etc/gitlab
+      - ./logs:/var/log/gitlab
+      - ./data:/var/opt/gitlab
+networks:
+  default:
+    external:
+      name: gitlab-network

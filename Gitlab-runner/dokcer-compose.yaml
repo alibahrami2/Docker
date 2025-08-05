@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  gitlab-runner:
+    image: docker.arvancloud.ir/gitlab/gitlab-runner:latest
+    restart: always
+    volumes:
+      - ./config:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock
+networks:
+  default:
+    external:
+      name: gitlab-network
